@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ESHINE - 画像からanimated SVGを生成するツール">
+  <title>ESHINE - Animated SVG Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #FBF7F0;
+      --text: #2A1A0A;
+      --accent: #C8854A;
+      --accent-light: #E8A96A;
+      --muted: #7A6050;
+      --border: #E0D0C0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ヒーロー */
+    .hero {
+      padding: 72px 0 56px;
+      text-align: center;
+    }
+
+    .hero-icon {
+      display: inline-block;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .hero-tagline {
+      font-size: 1rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    .badge-dev {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 4px 14px;
+      border: 1.5px solid var(--accent);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+
+    /* 区切り */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* 価値セクション */
+    .value {
+      padding: 56px 0;
+      text-align: center;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .value-flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 32px;
+    }
+
+    .value-item {
+      background: #F0E8DC;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .value-arrow {
+      color: var(--accent);
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    .value-desc {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ワークフロー */
+    .workflow {
+      padding: 56px 0;
+      background: #F5EFE6;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .workflow .container {
+      text-align: center;
+    }
+
+    .workflow-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+      color: var(--text);
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      text-align: left;
+    }
+
+    .step-num {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-body {
+      flex: 1;
+      padding-top: 4px;
+    }
+
+    .step-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .step-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .step-connector {
+      width: 2px;
+      height: 16px;
+      background: var(--border);
+      margin-left: 15px;
+    }
+
+    .output-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 28px;
+      background: var(--text);
+      color: var(--bg);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-family: monospace;
+      letter-spacing: 0.05em;
+    }
+
+    /* CTA */
+    .cta {
+      padding: 64px 0;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .cta-sub {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .btn-x {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--text);
+      color: var(--bg);
+      padding: 14px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: opacity 0.15s;
+    }
+
+    .btn-x:hover {
+      opacity: 0.8;
+    }
+
+    /* フッター */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+    }
+
+    footer .container {
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px 20px;
+      margin-bottom: 16px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-sep {
+      color: var(--border);
+      font-size: 0.85rem;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* レスポンシブ */
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .value-flow {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .value-arrow {
+        transform: rotate(90deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ヒーロー -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-icon">
+        <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="ESHINE logo">
+          <rect width="72" height="72" rx="18" fill="#C8854A"/>
+          <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle"
+                font-family="'Noto Sans JP', sans-serif" font-size="42" font-weight="700"
+                fill="#FBF7F0">E</text>
+        </svg>
+      </div>
+      <h1 class="hero-title">ESHINE</h1>
+      <p class="hero-tagline">Animated SVG Generator</p>
+      <span class="badge-dev">現在開発中 / In Development</span>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- 価値 -->
+  <section class="value">
+    <div class="container">
+      <p class="section-label">What it does</p>
+      <div class="value-flow" role="list">
+        <span class="value-item" role="listitem">画像</span>
+        <span class="value-arrow" aria-hidden="true">→</span>
+        <span class="value-item" role="listitem">パーツ切り出し</span>
+        <span class="value-arrow" aria-hidden="true">→</span>
+        <span class="value-item" role="listitem">animated SVG</span>
+      </div>
+      <p class="value-desc">
+        画像をアップロードするだけで、AIがパーツを認識・切り出し、
+        パラメータを調整してアニメーション付きSVGを自動生成します。
+        イラストをそのままアプリUIのアセットに変換する、新しいワークフローです。
+      </p>
+    </div>
+  </section>
+
+  <!-- ワークフロー -->
+  <section class="workflow">
+    <div class="container">
+      <p class="workflow-title">ワークフロー</p>
+      <div class="steps" role="list">
+
+        <div class="step" role="listitem">
+          <div class="step-num" aria-hidden="true">1</div>
+          <div class="step-body">
+            <p class="step-name">画像の読み込み</p>
+            <p class="step-desc">PNG / JPEG / WebP をインポート</p>
+          </div>
+        </div>
+
+        <div class="step-connector" aria-hidden="true"></div>
+
+        <div class="step" role="listitem">
+          <div class="step-num" aria-hidden="true">2</div>
+          <div class="step-body">
+            <p class="step-name">パーツ切り出し</p>
+            <p class="step-desc">AIが意味のある領域を自動検出・分割</p>
+          </div>
+        </div>
+
+        <div class="step-connector" aria-hidden="true"></div>
+
+        <div class="step" role="listitem">
+          <div class="step-num" aria-hidden="true">3</div>
+          <div class="step-body">
+            <p class="step-name">パラメータ調整</p>
+            <p class="step-desc">アニメーション種別・速度・イージングを設定</p>
+          </div>
+        </div>
+
+        <div class="step-connector" aria-hidden="true"></div>
+
+        <div class="step" role="listitem">
+          <div class="step-num" aria-hidden="true">4</div>
+          <div class="step-body">
+            <p class="step-name">出力</p>
+            <p class="step-desc">アニメーション付き SVG ファイルをエクスポート</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="output-badge" aria-label="出力形式: .esvg">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 2h7l3 3v9H3V2z" stroke="#FBF7F0" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M10 2v3h3" stroke="#FBF7F0" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        output.esvg
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <h2 class="cta-title">リリース情報をいち早く受け取る</h2>
+      <p class="cta-sub">X（旧Twitter）でフォローして最新情報をチェック</p>
+      <a href="https://x.com/eshine_app" class="btn-x" target="_blank" rel="noopener noreferrer">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.262 5.636L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/>
+        </svg>
+        @eshine_app をフォロー
+      </a>
+    </div>
+  </section>
+
+  <!-- フッター -->
+  <footer>
+    <div class="container">
+      <nav class="footer-links" aria-label="フッターナビゲーション">
+        <a href="mailto:joh.shimo.jp@gmail.com">サポート: joh.shimo.jp@gmail.com</a>
+        <span class="footer-sep" aria-hidden="true">|</span>
+        <a href="/eshine-landing/privacy-policy/">プライバシーポリシー</a>
+      </nav>
+      <p class="footer-copy">
+        &copy; 2026 ESHINE &nbsp;&middot;&nbsp; In development
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
