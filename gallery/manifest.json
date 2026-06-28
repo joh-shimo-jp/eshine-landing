@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "baseUrl": "https://joh-shimo-jp.github.io/eshine-landing/gallery/",
+  "categories": [
+    {
+      "id": "static",
+      "label": "静的SVG",
+      "items": [
+        {
+          "id": "eshine-favicon",
+          "label": "ESHINE ファビコン",
+          "previewType": "esvg-static",
+          "assetPath": "gallery/static/eshine-favicon-after.svg",
+          "beforeAssets": [
+            "gallery/static/eshine-favicon-before.png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "animation",
+      "label": "アニメーション",
+      "items": [
+        {
+          "id": "ninjine-splash",
+          "label": "NINJIN → ESHINE",
+          "previewType": "esvg-static",
+          "assetPath": "gallery/animation/ninjine-splash-after.svg",
+          "beforeAssets": [
+            "gallery/animation/ninjine-splash-before.png"
+          ]
+        }
+      ]
+    }
+  ]
+}
