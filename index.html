@@ -150,16 +150,154 @@
     .steps {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      max-width: 480px;
+      gap: 24px;
+      max-width: 520px;
       margin: 0 auto;
+      text-align: left;
     }
 
     .step {
       display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .step-header {
+      display: flex;
       align-items: flex-start;
       gap: 16px;
+    }
+
+    .step-badge {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .step-badge--external {
+      background: #E8E0D4;
+      color: var(--muted);
+    }
+
+    .step-badge--eshine {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .step-visual {
+      margin-left: 48px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(42, 26, 10, 0.06);
+    }
+
+    .step-visual img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .step-visual figcaption {
+      padding: 8px 12px;
+      font-size: 0.72rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      font-family: monospace;
+    }
+
+    .step-visual--collab {
+      margin-left: 48px;
+      padding: 20px;
+      background: #fff;
+      overflow: visible;
+    }
+
+    .collab-flow {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .collab-panel {
+      text-align: center;
+    }
+
+    .collab-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: var(--muted);
+    }
+
+    .collab-label--ninjine {
+      color: #4A3728;
+    }
+
+    .collab-preview-frame {
+      background: #F5EFE6;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      height: 184px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .collab-preview-frame img {
+      max-width: 100%;
+      max-height: 160px;
+      width: auto;
+      height: auto;
+      display: block;
+    }
+
+    .collab-preview-frame--fab img {
+      max-height: 160px;
+      max-width: 160px;
+    }
+
+    .collab-arrow {
+      color: var(--accent);
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .collab-ai-notes {
+      padding: 10px 12px;
+      font-size: 0.75rem;
+      font-family: inherit;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
       text-align: left;
+      line-height: 1.55;
+    }
+
+    .collab-ai-notes-title {
+      margin: 0 0 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text);
+    }
+
+    .collab-ai-notes ul {
+      margin: 0;
+      padding-left: 1.15em;
+    }
+
+    .collab-ai-notes li + li {
+      margin-top: 2px;
     }
 
     .step-num {
@@ -456,6 +594,24 @@
         transform: rotate(90deg);
         text-align: center;
       }
+
+      .step-visual {
+        margin-left: 0;
+      }
+
+      .collab-flow {
+        grid-template-columns: 1fr;
+      }
+
+      .collab-arrow {
+        transform: rotate(90deg);
+        text-align: center;
+      }
+
+      .step-visual--collab {
+        margin-left: 0;
+        padding: 14px;
+      }
     }
   </style>
 </head>
@@ -481,16 +637,17 @@
     <div class="container">
       <p class="section-label">できること</p>
       <div class="value-flow" role="list">
-        <span class="value-item" role="listitem">画像</span>
+        <span class="value-item" role="listitem">画像生成</span>
         <span class="value-arrow" aria-hidden="true">→</span>
-        <span class="value-item" role="listitem">構造化</span>
+        <span class="value-item" role="listitem">ESHINE</span>
         <span class="value-arrow" aria-hidden="true">→</span>
-        <span class="value-item" role="listitem">AIと制作</span>
+        <span class="value-item" role="listitem">.esvg</span>
+        <span class="value-arrow" aria-hidden="true">→</span>
+        <span class="value-item" role="listitem">AI 制作</span>
       </div>
       <p class="value-desc">
-        画像から、ユーザー自身がパーツへ構造化します。
-        構造化以降は AI と協業し、デザイン・開発・制作などのクリエイティブ作業を進められます。
-        NINJINE の UI 制作など、実プロダクト開発でも活用しています。
+        外部ツールで作った画像を ESHINE で構造化し、.esvg として出力。
+        構造化データは AI や制作ツール（NINJINE など）へ渡し、協業して仕上げます。
       </p>
     </div>
   </section>
@@ -498,46 +655,109 @@
   <!-- ワークフロー -->
   <section class="workflow">
     <div class="container">
-      <p class="workflow-title">ワークフロー</p>
+      <p class="section-label">Workflow</p>
+      <p class="workflow-title">画像生成から AI 制作まで</p>
       <div class="steps" role="list">
 
-        <div class="step" role="listitem">
-          <div class="step-num" aria-hidden="true">1</div>
-          <div class="step-body">
-            <p class="step-name">画像の読み込み</p>
-            <p class="step-desc">PNG / JPEG / WebP をインポート</p>
+        <article class="step" role="listitem">
+          <div class="step-header">
+            <div class="step-num" aria-hidden="true">1</div>
+            <div class="step-body">
+              <p class="step-name">画像生成 <span class="step-badge step-badge--external">ESHINE 外</span></p>
+              <p class="step-desc">AI 画像生成・写真・イラストなど、元画像を用意</p>
+            </div>
           </div>
-        </div>
+          <figure class="step-visual">
+            <img src="assets/workflow/01-image-gen.png" alt="画像生成ツールの例">
+            <figcaption>01-image-gen.png</figcaption>
+          </figure>
+        </article>
 
         <div class="step-connector" aria-hidden="true"></div>
 
-        <div class="step" role="listitem">
-          <div class="step-num" aria-hidden="true">2</div>
-          <div class="step-body">
-            <p class="step-name">構造化</p>
-            <p class="step-desc">ユーザーが画像から意味のあるパーツへ切り出し・整理</p>
+        <article class="step" role="listitem">
+          <div class="step-header">
+            <div class="step-num" aria-hidden="true">2</div>
+            <div class="step-body">
+              <p class="step-name">ESHINE 読み込み <span class="step-badge step-badge--eshine">ESHINE</span></p>
+              <p class="step-desc">PNG / JPEG / WebP をアプリへインポート</p>
+            </div>
           </div>
-        </div>
+          <figure class="step-visual">
+            <img src="assets/workflow/02-eshine-load.png" alt="ESHINE 読み込み画面">
+            <figcaption>02-eshine-load.png</figcaption>
+          </figure>
+        </article>
 
         <div class="step-connector" aria-hidden="true"></div>
 
-        <div class="step" role="listitem">
-          <div class="step-num" aria-hidden="true">3</div>
-          <div class="step-body">
-            <p class="step-name">AIと制作</p>
-            <p class="step-desc">構造化したデータをもとに、AIと協業して仕上げ</p>
+        <article class="step" role="listitem">
+          <div class="step-header">
+            <div class="step-num" aria-hidden="true">3</div>
+            <div class="step-body">
+              <p class="step-name">構造化 <span class="step-badge step-badge--eshine">ESHINE</span></p>
+              <p class="step-desc">ユーザーがパーツへ切り出し・整理（AI ネイティブの核心）</p>
+            </div>
           </div>
-        </div>
+          <figure class="step-visual">
+            <img src="assets/workflow/03-eshine-structure.png" alt="ESHINE 構造化・パーツ編集画面">
+            <figcaption>03-eshine-structure.png</figcaption>
+          </figure>
+        </article>
 
         <div class="step-connector" aria-hidden="true"></div>
 
-        <div class="step" role="listitem">
-          <div class="step-num" aria-hidden="true">4</div>
-          <div class="step-body">
-            <p class="step-name">出力</p>
-            <p class="step-desc">.esvg など、用途に応じた形式でエクスポート</p>
+        <article class="step" role="listitem">
+          <div class="step-header">
+            <div class="step-num" aria-hidden="true">4</div>
+            <div class="step-body">
+              <p class="step-name">.esvg 生成 <span class="step-badge step-badge--eshine">ESHINE</span></p>
+              <p class="step-desc">構造化データから .esvg を出力（GIF / アニメ書き出しも可）</p>
+            </div>
           </div>
-        </div>
+          <figure class="step-visual">
+            <img src="assets/workflow/04-eshine-export.png" alt="ESHINE 変換・出力画面">
+            <figcaption>04-eshine-export.png</figcaption>
+          </figure>
+        </article>
+
+        <div class="step-connector" aria-hidden="true"></div>
+
+        <article class="step" role="listitem">
+          <div class="step-header">
+            <div class="step-num" aria-hidden="true">5</div>
+            <div class="step-body">
+              <p class="step-name">AI 読み込み <span class="step-badge step-badge--external">ESHINE 外</span></p>
+              <p class="step-desc">構造化 .esvg を NINJINE の <strong>共有 FAB</strong>（Brand 部品）として取り込む</p>
+            </div>
+          </div>
+          <figure class="step-visual step-visual--collab">
+            <div class="collab-flow">
+              <div class="collab-panel">
+                <p class="collab-label">Before · ESHINE 出力</p>
+                <div class="collab-preview-frame">
+                  <img src="assets/workflow/LP_sample_before.svg" width="200" height="200" alt="ESHINE 構造化出力（ウサギ 3 パーツ）">
+                </div>
+              </div>
+              <span class="collab-arrow" aria-hidden="true">→</span>
+              <div class="collab-panel">
+                <p class="collab-label collab-label--ninjine">After · NINJINE 共有 FAB</p>
+                <div class="collab-preview-frame collab-preview-frame--fab">
+                  <img src="assets/workflow/ninjine-share-fab.svg" width="160" height="160" alt="NINJINE 共有 FAB（アプリファビコン）">
+                </div>
+              </div>
+            </div>
+            <figcaption class="collab-ai-notes">
+              <p class="collab-ai-notes-title">AI による取り込み・調整（例）</p>
+              <ul>
+                <li>パススムージング — 折れ線（L）を Bezier 曲線（Q）へ変換</li>
+                <li>リサイズ — viewBox 最適化・スケール調整でアイコン密度に合わせる</li>
+                <li>円形クリップ — 共有 FAB / ファビコン向けマスク</li>
+                <li>パーツ統合 — 構造化パーツを単一 SVG アセットへ</li>
+              </ul>
+            </figcaption>
+          </figure>
+        </article>
 
       </div>
 
@@ -546,7 +766,7 @@
           <path d="M3 2h7l3 3v9H3V2z" stroke="#FBF7F0" stroke-width="1.5" stroke-linejoin="round"/>
           <path d="M10 2v3h3" stroke="#FBF7F0" stroke-width="1.5" stroke-linejoin="round"/>
         </svg>
-        出力例: .esvg
+        ハブ形式: .esvg
       </div>
     </div>
   </section>
@@ -603,31 +823,6 @@
     </div>
   </section>
 
-  <!-- アプリ画面イメージ -->
-  <section class="screens" id="screens">
-    <div class="container">
-      <p class="section-label">App Screens</p>
-      <h2 class="workflow-title">アプリ画面イメージ</h2>
-      <p class="value-desc" style="margin-bottom: 0;">
-        構造化フローとチケット購入画面の代表例です。
-      </p>
-      <div class="screen-grid">
-        <figure class="screen-card">
-          <img src="assets/screenshots/flow-shell.png" alt="ESHINE フロー画面">
-          <figcaption class="screen-caption">① フロー画面（読込〜出力）</figcaption>
-        </figure>
-        <figure class="screen-card">
-          <img src="assets/screenshots/parts-edit.png" alt="ESHINE パーツ編集画面">
-          <figcaption class="screen-caption">② パーツ編集・構造化</figcaption>
-        </figure>
-        <figure class="screen-card">
-          <img src="assets/screenshots/ticket-store.png" alt="ESHINE チケットストア">
-          <figcaption class="screen-caption">③ チケットストア（IAP）</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
   <!-- チケット消費 -->
   <section class="tickets" id="tickets">
     <div class="container">
@@ -636,6 +831,11 @@
       <p class="value-desc" style="margin-bottom: 0;">
         基本操作は無料。プレミアム出力は <strong>1 操作 = チケット 1 枚</strong> です（E-BIZ-01 実装と一致）。
       </p>
+
+      <figure class="screen-card" style="max-width: 240px; margin: 28px auto 0;">
+        <img src="assets/screenshots/ticket-store.png" alt="ESHINE チケットストア">
+        <figcaption class="screen-caption">チケットストア（任意: ticket-store.png）</figcaption>
+      </figure>
 
       <div class="ticket-table-wrap">
         <table class="ticket-table">
@@ -649,12 +849,12 @@
           <tbody>
             <tr>
               <td>無料</td>
-              <td>画像読込・パーツ切出・.esvg 生成・WM あり保存</td>
+              <td>画像読込・パーツ切出・.esvg 生成・ウォーターマーク付き保存</td>
               <td>0 枚</td>
             </tr>
             <tr>
               <td>有料</td>
-              <td>WM 除去付き .esvg 保存（保存実行時）</td>
+              <td>ウォーターマークなし .esvg 保存（保存実行時）</td>
               <td>1 枚</td>
             </tr>
             <tr>
@@ -686,7 +886,7 @@
       <div class="ticket-note">
         <ul>
           <li>チケット有効期限: 購入から 12 ヶ月</li>
-          <li>WM トグル ON だけでは消費しません（保存実行時に 1 枚）</li>
+          <li>ウォーターマーク除去トグル ON だけでは消費しません（保存実行時に 1 枚）</li>
           <li>アプリ内課金（RevenueCat / App Store IAP）</li>
         </ul>
       </div>
