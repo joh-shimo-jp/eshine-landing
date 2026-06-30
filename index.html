@@ -454,6 +454,39 @@
       font-weight: 700;
     }
 
+
+    /* ギャラリー: GIF のみカード（before なし） */
+    .gallery-card--full .ba-frame--gif {
+      width: 100%;
+    }
+
+    .ba-frame--gif {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 120px;
+    }
+
+    .ba-frame--gif img {
+      max-width: 100%;
+      max-height: 200px;
+      width: auto;
+      height: auto;
+    }
+
+    .gallery-category-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
     /* 画面イメージ */
     .screens {
       padding: 56px 0;
@@ -777,11 +810,13 @@
       <p class="section-label">Gallery</p>
       <h2 class="workflow-title">Before / After 見本</h2>
       <p class="value-desc" style="margin-bottom: 0;">
-        画像から構造化した .esvg の代表例です（静的プレビュー）。
+        画像から構造化した .esvg の代表例です。アニメーション出力（GIF）を含む 4 件を掲載しています。
       </p>
       <div class="gallery-grid">
 
+        <!-- 1: ESHINE ファビコン（静的SVG） -->
         <article class="gallery-card">
+          <p class="gallery-category-label">静的 SVG</p>
           <h3>ESHINE ファビコン</h3>
           <div class="before-after">
             <div>
@@ -800,8 +835,10 @@
           </div>
         </article>
 
+        <!-- 2: NINJIN → ESHINE スプラッシュ（GIF アニメーション） -->
         <article class="gallery-card">
-          <h3>NINJIN → ESHINE スプラッシュ</h3>
+          <p class="gallery-category-label">アニメーション</p>
+          <h3>NINJIN → ESHINE（筆書きアニメ）</h3>
           <div class="before-after">
             <div>
               <p class="ba-label">Before</p>
@@ -811,9 +848,40 @@
             </div>
             <span class="ba-arrow" aria-hidden="true">→</span>
             <div>
-              <p class="ba-label">After (.esvg)</p>
+              <p class="ba-label">After (GIF)</p>
               <div class="ba-frame">
-                <img src="gallery/animation/ninjine-splash-after.svg" alt="構造化後のスプラッシュ">
+                <img src="gallery/animation/ninjine-splash.gif" alt="NINJIN 筆書きアニメーション GIF" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3: flow_growth_glyph 5工程（GIF） -->
+        <article class="gallery-card gallery-card--full">
+          <p class="gallery-category-label">NINJINE UI</p>
+          <h3>flow_growth_glyph（5 工程スライドショー）</h3>
+          <p class="ba-label" style="margin-bottom: 12px;">Seed → Goal → Task → Deliverable → Ship</p>
+          <div class="ba-frame--gif">
+            <img src="gallery/ninjine-ui/flow-growth-glyph.gif" alt="flow_growth_glyph 5工程 GIF" loading="lazy">
+          </div>
+        </article>
+
+        <!-- 4: NINJIN → ESHINE 混合アニメーション（GIF） -->
+        <article class="gallery-card">
+          <p class="gallery-category-label">混合アニメーション</p>
+          <h3>NINJIN → ESHINE（混合シーン）</h3>
+          <div class="before-after">
+            <div>
+              <p class="ba-label">Before</p>
+              <div class="ba-frame">
+                <img src="gallery/animation/ninjine-splash-before.png" alt="スプラッシュ元画像">
+              </div>
+            </div>
+            <span class="ba-arrow" aria-hidden="true">→</span>
+            <div>
+              <p class="ba-label">After (GIF)</p>
+              <div class="ba-frame">
+                <img src="gallery/mixed/ninjine-splash-mixed.gif" alt="NINJIN→ESHINE 混合シーン GIF" loading="lazy">
               </div>
             </div>
           </div>
