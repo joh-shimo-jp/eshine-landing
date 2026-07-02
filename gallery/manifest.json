@@ -23,9 +23,37 @@
       "items": [
         {
           "id": "ninjine-splash",
-          "label": "NINJIN → ESHINE",
-          "previewType": "esvg-static",
-          "assetPath": "gallery/animation/ninjine-splash-after.svg",
+          "label": "NINJIN → ESHINE（筆書き）",
+          "previewType": "gif",
+          "assetPath": "gallery/animation/ninjine-splash.gif",
+          "beforeAssets": [
+            "gallery/animation/ninjine-splash-before.png"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ninjine-ui",
+      "label": "NINJINE UI",
+      "items": [
+        {
+          "id": "flow-growth-glyph",
+          "label": "flow_growth_glyph（5工程）",
+          "previewType": "gif",
+          "assetPath": "gallery/ninjine-ui/flow-growth-glyph.gif",
+          "beforeAssets": []
+        }
+      ]
+    },
+    {
+      "id": "mixed",
+      "label": "混合アニメーション",
+      "items": [
+        {
+          "id": "ninjine-splash-mixed",
+          "label": "NINJIN → ESHINE（混合）",
+          "previewType": "gif",
+          "assetPath": "gallery/mixed/ninjine-splash-mixed.gif",
           "beforeAssets": [
             "gallery/animation/ninjine-splash-before.png"
           ]
